@@ -7,6 +7,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
+//Implement the relation
 @Entity
 @Table(name="sales")
 @JsonIgnoreProperties(value={"datetime"},allowGetters = true)
