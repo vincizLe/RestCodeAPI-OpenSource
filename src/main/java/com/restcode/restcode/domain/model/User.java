@@ -1,15 +1,18 @@
 package com.restcode.restcode.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.EntityListeners;
-import javax.persistence.MappedSuperclass;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
 public abstract class User {
+
     @NotNull
     private String names;
 
@@ -25,8 +28,12 @@ public abstract class User {
     @NotNull
     private Long phone;
 
-    //Falta especificar la relación
-    //private Plan plan;
+    //Relation
+    @OneToOne(fetch= FetchType.LAZY,optional = false)
+    @JoinColumn(name = "plan_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Plan plan;
 
     public String getNames() {
         return names;
@@ -66,5 +73,13 @@ public abstract class User {
 
     public void setPhone(Long phone) {
         this.phone = phone;
+    }
+
+    public Plan getPlan() {
+        return plan;
+    }
+
+    public void setPlan(Plan plan) {
+        this.plan = plan;
     }
 }

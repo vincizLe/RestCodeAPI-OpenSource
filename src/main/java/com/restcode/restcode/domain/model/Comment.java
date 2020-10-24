@@ -1,6 +1,9 @@
 package com.restcode.restcode.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -23,11 +26,19 @@ public class Comment {
     @Lob
     private String commentary;
 
-    //Falta especificar la relación
-    //private Consultant consultant;
+    //Relation
+    @ManyToOne(fetch=FetchType.LAZY,optional = false)
+    @JoinColumn(name = "consultant_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Consultant consultant;
 
-    //Falta especificar la relación
-    //private Owner owner;
+    //Relation
+    @ManyToOne(fetch=FetchType.LAZY,optional = false)
+    @JoinColumn(name = "owner_id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Owner owner;
 
     public Long getId() {
         return id;
@@ -53,4 +64,19 @@ public class Comment {
         this.commentary = commentary;
     }
 
+    public Consultant getConsultant() {
+        return consultant;
+    }
+
+    public void setConsultant(Consultant consultant) {
+        this.consultant = consultant;
+    }
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+    }
 }
