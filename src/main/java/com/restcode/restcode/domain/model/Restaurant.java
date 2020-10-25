@@ -28,35 +28,37 @@ public class Restaurant {
     //Falta especificar la relación
     //private Owner owner;
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
 
-    public void setId(Long id) {
+    public Restaurant setId(Long id) {
         this.id = id;
+        return this;
     }
 
     public String getRestaurantName() {
         return restaurantName;
     }
 
-    public void setRestaurantName(String restaurantName) {
+    public Restaurant setRestaurantName(String restaurantName) {
         this.restaurantName = restaurantName;
+        return this;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public Restaurant setAddress(String address) {
         this.address = address;
+        return this;
     }
 
     public Long getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Long phoneNumber) {
+    public Restaurant setPhoneNumber(Long phoneNumber) {
         this.phoneNumber = phoneNumber;
+        return this;
     }
 }

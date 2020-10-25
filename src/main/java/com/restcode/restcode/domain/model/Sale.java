@@ -23,12 +23,6 @@ public class Sale {
     @NotNull
     private String clientFullname;
 
-    /*@ManyToOne(fetch=FetchType.LAZY,optional = false)
-    @JoinColumn(name="restaurant_id",nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
-    private Restaurant restaurant;*/
-
     public Long getId() {
         return id;
     }
