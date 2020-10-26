@@ -22,10 +22,11 @@ public class PlanService implements IPlanService {
 
     @Override
     public Plan getPlanByOwnerId(Long ownerId, Long planId) {
-        return ownerRepository.findByIdAndOwnerId(planId, ownerId)
+        return null;
+        /*return planRepository.findByIdAndOwnerId(planId, ownerId)
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Comment not found with Id " + planId +
-                                " and OwnerId " + ownerId));
+                                " and OwnerId " + ownerId));*/
     }
 
     @Override

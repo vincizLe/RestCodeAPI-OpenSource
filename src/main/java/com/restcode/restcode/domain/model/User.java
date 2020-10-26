@@ -29,8 +29,8 @@ public abstract class User {
     private Long phone;
 
     //Relation
-    @OneToOne(fetch= FetchType.LAZY,optional = false)
-    @JoinColumn(name = "plan_id", nullable = false)
+    @OneToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name = "plan_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Plan plan;

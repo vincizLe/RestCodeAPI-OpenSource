@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface IOwnerRepository extends JpaRepository<Owner, Long> {
-    Optional<Plan> findByIdAndOwnerId(Long planId, Long ownerId);
+
 }

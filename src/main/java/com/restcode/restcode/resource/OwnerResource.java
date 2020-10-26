@@ -1,9 +1,12 @@
 package com.restcode.restcode.resource;
 
-public class OwnerResource {
+import com.restcode.restcode.domain.model.User;
+
+public class OwnerResource extends User {
 
     private Long id;
     private Long ruc;
+
 
     public Long getId() {
         return id;

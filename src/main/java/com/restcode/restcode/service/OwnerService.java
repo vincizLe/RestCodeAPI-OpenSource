@@ -34,15 +34,18 @@ public class OwnerService implements IOwnerService {
 
     @Override
     public Owner updateOwner(Long ownerId, Owner ownerRequest) {
-        return null;
-        /*Owner owner = ownerRepository.findById(ownerId)
+        return ownerRepository.findById(ownerId)
+                .map(owner -> {
+                    owner.setNames(ownerRequest.getNames());
+                    owner.setSurnames(ownerRequest.getSurnames());
+                    owner.setEmail(ownerRequest.getEmail());
+                    owner.setPassword(ownerRequest.getPassword());
+                    owner.setPhone(ownerRequest.getPhone());
+                    owner.setRuc(ownerRequest.getRuc());
+                    return ownerRepository.save(owner);
+                })
                 .orElseThrow(() -> new ResourceNotFoundException(
-                        "Owner", "Id", ownerId));
-        return ownerRepository.save(
-                owner.setNames(ownerRequest.getNames())
-                .setSurnames(ownerRequest.getSurnames())
-                .setEmail(ownerRequest.getEmail())
-                .setPassword(ownerRequest.getPassword())
-                .setPhone(ownerRequest.getPhone()));*/
+                        "OwnerId " + ownerId + " not found"
+                ));
     }
 }
