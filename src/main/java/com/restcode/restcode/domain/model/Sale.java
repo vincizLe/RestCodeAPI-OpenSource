@@ -1,13 +1,15 @@
 package com.restcode.restcode.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
-//Implement the relation
 @Entity
 @Table(name="sales")
 @JsonIgnoreProperties(value={"datetime"},allowGetters = true)
@@ -23,11 +25,11 @@ public class Sale {
     @NotNull
     private String clientFullname;
 
-    /*@ManyToOne(fetch=FetchType.LAZY,optional = false)
+    @ManyToOne(fetch=FetchType.LAZY,optional = false)
     @JoinColumn(name="restaurant_id",nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private Restaurant restaurant;*/
+    private Restaurant restaurant;
 
     public Long getId() {
         return id;
@@ -51,5 +53,13 @@ public class Sale {
 
     public void setClientFullname(String clientFullname) {
         this.clientFullname = clientFullname;
+    }
+
+    public Restaurant getRestaurant() {
+        return restaurant;
+    }
+
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 }

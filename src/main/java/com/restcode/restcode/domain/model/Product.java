@@ -1,45 +1,52 @@
 package com.restcode.restcode.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="products")
+@Table(name="categories")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    private String productName;
+    private String categoryName;
 
-    @NotNull
-    private int quantity;
+    //Dependency Restaurant
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="restaurant_id", nullable = false)
+    @OnDelete(action= OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Restaurant restaurant;
 
-    //Falta especificar la relación
-    //private Category category;
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public Product setId(Long id) {
         this.id = id;
+        return this;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getCategoryName() {
+        return categoryName;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public Product setCategoryName(String categoryName) {
+        this.categoryName = categoryName;
+        return this;
     }
 
-    public int getQuantity() {
-        return quantity;
-    }
+    public Restaurant getRestaurant() { return restaurant; }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public Product setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+        return this;
     }
 }
