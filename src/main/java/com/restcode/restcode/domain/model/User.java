@@ -8,6 +8,7 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @EntityListeners(AuditingEntityListener.class)
 @MappedSuperclass
@@ -29,7 +30,7 @@ public abstract class User {
     private Long phone;
 
     //Relation
-    @OneToOne(fetch= FetchType.LAZY)
+    @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name = "plan_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore

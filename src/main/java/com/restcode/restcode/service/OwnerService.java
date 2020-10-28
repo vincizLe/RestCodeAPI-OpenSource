@@ -1,7 +1,9 @@
 package com.restcode.restcode.service;
 
 import com.restcode.restcode.domain.model.Owner;
+import com.restcode.restcode.domain.model.Plan;
 import com.restcode.restcode.domain.repository.IOwnerRepository;
+import com.restcode.restcode.domain.repository.IPlanRepository;
 import com.restcode.restcode.domain.service.IOwnerService;
 import com.restcode.restcode.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +16,9 @@ public class OwnerService implements IOwnerService {
 
     @Autowired
     private IOwnerRepository ownerRepository;
+
+    @Autowired
+    private IPlanRepository planRepository;
 
     @Override
     public Page<Owner> getAllOwners(Pageable pageable) {
@@ -48,4 +53,17 @@ public class OwnerService implements IOwnerService {
                         "OwnerId " + ownerId + " not found"
                 ));
     }
+
+    @Override
+    public Owner assignOwnerPlan(Long ownerId, Long planId) {
+        Plan plan = planRepository.findById(planId)
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Plan", "Id", planId));
+        return ownerRepository.findById(ownerId).map(owner -> {
+            return ownerRepository.save(owner.planIs(plan));
+        }).orElseThrow(() -> new ResourceNotFoundException(
+                "Post", "Id", ownerId));
+    }
+
+
 }

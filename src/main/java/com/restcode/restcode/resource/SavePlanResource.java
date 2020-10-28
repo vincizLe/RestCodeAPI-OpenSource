@@ -12,7 +12,6 @@ public class SavePlanResource {
     private String planName;
 
     @NotNull
-    @NotBlank
     private Double price;
 
     public String getPlanName() {

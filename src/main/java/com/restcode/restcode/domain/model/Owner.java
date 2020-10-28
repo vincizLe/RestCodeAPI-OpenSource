@@ -13,6 +13,11 @@ public class Owner extends User{
     @NotNull
     private Long ruc;
 
+    public Owner planIs(Plan plan) {
+        this.setPlan(plan);
+        return this;
+    }
+
     public Long getId() {
         return id;
     }
@@ -28,4 +33,5 @@ public class Owner extends User{
     public void setRuc(Long ruc) {
         this.ruc = ruc;
     }
+
 }

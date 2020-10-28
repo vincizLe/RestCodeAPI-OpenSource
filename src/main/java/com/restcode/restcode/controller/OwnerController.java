@@ -62,4 +62,11 @@ public class OwnerController {
         return convertToResource(
                 ownerService.updateOwner(ownerId, owner));
     }
+
+    @PostMapping("/posts/{ownerId}/tags/{planId}")
+    public OwnerResource assignOwnerPlan(
+            @PathVariable(name = "ownerId") Long ownerId,
+            @PathVariable(name = "planId") Long planId) {
+        return convertToResource(ownerService.assignOwnerPlan(ownerId, planId));
+    }
 }
