@@ -1,17 +1,15 @@
-package com.restcode.restcode.domain.model;
+package com.restcode.restcode.resource;
 
-import javax.persistence.*;
+import com.restcode.restcode.domain.model.User;
+
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 
-@Entity
-@Table(name="consultants")
-public class Consultant extends User {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+public class ConsultantResource extends User {
 
-    @NotNull
-    @Column(unique = true)
+    private Long id;
     private String linkedln;
 
     public Long getId() {
@@ -22,7 +20,6 @@ public class Consultant extends User {
         this.id = id;
     }
 
-
     public String getLinkedln() {
         return linkedln;
     }
@@ -30,5 +27,4 @@ public class Consultant extends User {
     public void setLinkedln(String linkedln) {
         this.linkedln = linkedln;
     }
-
 }
