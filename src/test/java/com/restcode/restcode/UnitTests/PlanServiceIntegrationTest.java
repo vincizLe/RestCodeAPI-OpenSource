@@ -1,11 +1,11 @@
-package com.restcode.restcode;
+package com.restcode.restcode.UnitTests;
 
 import com.restcode.restcode.domain.model.Owner;
+import com.restcode.restcode.domain.model.Plan;
 import com.restcode.restcode.domain.repository.IOwnerRepository;
 import com.restcode.restcode.domain.repository.IPlanRepository;
-import com.restcode.restcode.domain.service.IOwnerService;
 import com.restcode.restcode.domain.service.IPlanService;
-import com.restcode.restcode.service.OwnerService;
+import com.restcode.restcode.service.PlanService;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -20,41 +20,43 @@ import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-
 @ExtendWith(SpringExtension.class)
-public class OwnerServiceIntegrationTest {
+public class PlanServiceIntegrationTest {
 
     @Autowired
-    private IOwnerService ownerService;
-
-    @MockBean
-    private IOwnerRepository ownerRepository;
+    private IPlanService planService;
 
     @MockBean
     private IPlanRepository planRepository;
 
+    @MockBean
+    private IOwnerRepository ownerRepository;
+
     @TestConfiguration
-    static class OwnerServiceTestConfiguration {
+    static class PlanServiceTestConfiguration {
         @Bean
-        public IOwnerService ownerService() {
-            return new OwnerService();
+        public IPlanService planService() {
+            return new PlanService();
         }
     }
 
     @Test
-    @DisplayName("When getOwnerByNames With Valid Names Then Returns Owner")
+    @DisplayName("When getPlanByOwnerID With Valid ID Then Returns Plan")
     public void whenGetOwnerByNameWithValidNamesThenReturnsOwner() {
         // Arrange
-        String names = "Ale";
+        Long ownerId = 1L;
+        Plan plan = new Plan();
         Owner owner = new Owner();
         owner.setId(1L);
-        owner.setNames(names);
-        Mockito.when(ownerRepository.findByNames(names))
+        plan.setId(1L);
+        owner.setPlan(plan);
+        Mockito.when(ownerRepository.findById(ownerId))
                 .thenReturn(Optional.of(owner));
         // Act
-        Owner foundOwner = ownerService.getOwnerByNames(names);
+        Plan foundPlan = planService.getPlanByOwnerId(ownerId);
 
         // Assert
-        assertThat(foundOwner.getNames().equals(names));
+        assertThat(foundPlan.getId().equals(owner.getPlan().getId()));
     }
+
 }
