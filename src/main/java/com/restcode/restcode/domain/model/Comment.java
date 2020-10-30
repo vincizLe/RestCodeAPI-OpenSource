@@ -26,12 +26,12 @@ public class Comment {
     @Lob
     private String commentary;
 
-    //Relation
+    /*//Relation
     @ManyToOne(fetch=FetchType.LAZY,optional = false)
     @JoinColumn(name = "consultant_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private Consultant consultant;
+    private Consultant consultant;*/
 
     //Relation
     @ManyToOne(fetch=FetchType.LAZY,optional = false)
@@ -64,13 +64,14 @@ public class Comment {
         this.commentary = commentary;
     }
 
-    public Consultant getConsultant() {
+    //CONSULTANT
+    /*public Consultant getConsultant() {
         return consultant;
     }
 
     public void setConsultant(Consultant consultant) {
         this.consultant = consultant;
-    }
+    }*/
 
     public Owner getOwner() {
         return owner;

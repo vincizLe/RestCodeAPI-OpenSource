@@ -10,4 +10,6 @@ public interface IOwnerService {
     Owner createOwner(Owner owner);
     Owner updateOwner(Long ownerId, Owner ownerRequest);
     Owner assignOwnerPlan(Long ownerId, Long planId);
+    Owner getOwnerByNames(String Names);
+
 }

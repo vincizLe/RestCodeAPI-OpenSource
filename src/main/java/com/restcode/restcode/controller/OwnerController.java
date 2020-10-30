@@ -5,6 +5,8 @@ import com.restcode.restcode.domain.model.Owner;
 import com.restcode.restcode.domain.service.IOwnerService;
 import com.restcode.restcode.resource.OwnerResource;
 import com.restcode.restcode.resource.SaveOwnerResource;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +18,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Tag(name="owners", description ="Owners API")
 @RestController
 @RequestMapping("/api")
 public class OwnerController {
@@ -33,6 +36,7 @@ public class OwnerController {
         return mapper.map(entity, OwnerResource.class);
     }
 
+    @Operation(summary="Get all Owners")
     @GetMapping("/owners")
     public Page<OwnerResource> getAllOwners(Pageable pageable) {
 
@@ -43,11 +47,13 @@ public class OwnerController {
         return new PageImpl<>(resources, pageable, resources.size());
     }
 
+    @Operation(summary="Get Owner")
     @GetMapping("/owners/{ownerId}")
     public OwnerResource getOwnerById(@PathVariable(value = "ownerId") Long ownerId) {
         return convertToResource(ownerService.getOwnerById(ownerId));
     }
 
+    @Operation(summary="Create Owner")
     @PostMapping("/owners")
     public OwnerResource createOwner(
             @Valid @RequestBody SaveOwnerResource resource) {
@@ -55,6 +61,7 @@ public class OwnerController {
         return convertToResource(ownerService.createOwner(owner));
     }
 
+    @Operation(summary="Update Owner")
     @PutMapping("/owners/{ownerId}")
     public OwnerResource updateOwner(@PathVariable Long ownerId,
                                    @Valid @RequestBody SaveOwnerResource resource) {
@@ -63,6 +70,7 @@ public class OwnerController {
                 ownerService.updateOwner(ownerId, owner));
     }
 
+    @Operation(summary="Assign Plan to Owner")
     @PostMapping("/posts/{ownerId}/tags/{planId}")
     public OwnerResource assignOwnerPlan(
             @PathVariable(name = "ownerId") Long ownerId,

@@ -65,5 +65,11 @@ public class OwnerService implements IOwnerService {
                 "Post", "Id", ownerId));
     }
 
+    @Override
+    public Owner getOwnerByNames(String names) {
+        return ownerRepository.findByNames(names)
+                .orElseThrow(() -> new ResourceNotFoundException("Owner", "Names", names));
+    }
+
 
 }

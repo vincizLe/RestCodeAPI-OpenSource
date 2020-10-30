@@ -4,6 +4,7 @@ import com.restcode.restcode.domain.model.Plan;
 import com.restcode.restcode.domain.service.IPlanService;
 import com.restcode.restcode.resource.PlanResource;
 import com.restcode.restcode.resource.SavePlanResource;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 
+@Tag(name="plans", description ="Plans API")
 @RestController
 @RequestMapping("/api")
 public class PlanController {

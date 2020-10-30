@@ -4,6 +4,8 @@ import com.restcode.restcode.domain.model.Comment;
 import com.restcode.restcode.domain.service.ICommentService;
 import com.restcode.restcode.resource.CommentResource;
 import com.restcode.restcode.resource.SaveCommentResource;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +18,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Tag(name="comments", description ="Comments API")
 @RestController
 @RequestMapping("/api")
 public class CommentController {
@@ -32,7 +35,6 @@ public class CommentController {
     private CommentResource convertToResource(Comment entity) {
         return mapper.map(entity, CommentResource.class);
     }
-
 
     @GetMapping("/owners/{ownerId}/comments")
     public Page<CommentResource> getAllCommentsByOwnerId(
