@@ -1,5 +1,9 @@
 package com.restcode.restcode.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -11,35 +15,61 @@ public class Product {
     private Long id;
 
     @NotNull
-    private String productName;
+    private String name;
+
+    private String description;
 
     @NotNull
-    private int quantity;
+    private Double price;
 
-    //Falta especificar la relación
-    //private Category category;
+    //Dependency Restaurant
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="restaurant_id", nullable = false)
+    @OnDelete(action= OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Restaurant restaurant;
+
 
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public Product setId(Long id) {
         this.id = id;
+        return this;
     }
 
-    public String getProductName() {
-        return productName;
+    public String getName() {
+        return name;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
+    public Product setName(String name) {
+        this.name = name;
+        return this;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public Restaurant getRestaurant() { return restaurant; }
+
+    public Product setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
+        return this;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public String getDescription() {
+        return description;
+    }
+
+    public Product setDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public Product setPrice(Double price) {
+        this.price = price;
+        return this;
     }
 }

@@ -11,8 +11,7 @@ public class Consultant extends User {
     private Long id;
 
     @NotNull
-    @Column(unique = true)
-    private String linkedln;
+    private String speciality;
 
     public Long getId() {
         return id;
@@ -22,13 +21,11 @@ public class Consultant extends User {
         this.id = id;
     }
 
-
-    public String getLinkedln() {
-        return linkedln;
+    public String getSpeciality() {
+        return speciality;
     }
 
-    public void setLinkedln(String linkedln) {
-        this.linkedln = linkedln;
+    public void setSpeciality(String speciality) {
+        this.speciality = speciality;
     }
-
 }

@@ -15,13 +15,20 @@ public class SaleDetail {
     private Long id;
 
     @NotNull
-    private String description;
+    private int quantity;
 
     @ManyToOne(fetch=FetchType.LAZY,optional = false)
     @JoinColumn(name="sale_id",nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private Sale sale;
+
+
+    /*@ManyToOne(fetch=FetchType.LAZY,optional = false)
+    @JoinColumn(name="product_id",nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Product product;*/
 
     public Long getId() {
         return id;
@@ -39,17 +46,21 @@ public class SaleDetail {
         this.sale = sale;
     }
 
-    public String getDescription() {
-        return description;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 
-    /*@ManyToOne(fetch=FetchType.LAZY,optional = false)
-    @JoinColumn(name="product_id",nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
-    private Product product;*/
+    /*public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
+    }*/
+
+
 }

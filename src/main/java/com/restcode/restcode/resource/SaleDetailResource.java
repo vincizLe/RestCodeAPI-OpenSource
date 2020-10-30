@@ -2,7 +2,7 @@ package com.restcode.restcode.resource;
 
 public class SaleDetailResource {
     private Long id;
-    private String description;
+    private int Quantity;
 
     public Long getId() {
         return id;
@@ -12,11 +12,12 @@ public class SaleDetailResource {
         this.id = id;
     }
 
-    public String getDescription() {
-        return description;
+
+    public int getQuantity() {
+        return Quantity;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setQuantity(int quantity) {
+        Quantity = quantity;
     }
 }

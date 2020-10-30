@@ -1,9 +1,6 @@
 package com.restcode.restcode.domain.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -18,16 +15,19 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Temporal(TemporalType.TIMESTAMP )
+    @CreatedDate
+    private Date datePublication;
 
     @NotNull
     @Lob
     private String commentary;
 
-    @ManyToOne(fetch = FetchType.LAZY,optional = false)
-    @JoinColumn(name = "consultant_id",nullable = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JsonIgnore
-    private Consultant consultant;
+    //Falta especificar la relación
+    //private Consultant consultant;
+
+    //Falta especificar la relación
+    //private Owner owner;
 
     public Long getId() {
         return id;
@@ -35,6 +35,14 @@ public class Comment {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Date getDatePublication() {
+        return datePublication;
+    }
+
+    public void setDatePublication(Date datePublication) {
+        this.datePublication = datePublication;
     }
 
     public String getCommentary() {
@@ -45,11 +53,4 @@ public class Comment {
         this.commentary = commentary;
     }
 
-    public Consultant getConsultant() {
-        return consultant;
-    }
-
-    public void setConsultant(Consultant consultant) {
-        this.consultant = consultant;
-    }
 }
