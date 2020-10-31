@@ -1,15 +1,8 @@
-package com.restcode.restcode.domain.model;
+package com.restcode.restcode.resource;
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
-
-import javax.persistence.EntityListeners;
-import javax.persistence.MappedSuperclass;
 import javax.validation.constraints.NotNull;
 
-@EntityListeners(AuditingEntityListener.class)
-@MappedSuperclass
-public abstract class User {
+public class SaveOwnerResource {
     @NotNull
     private String names;
 
@@ -25,8 +18,16 @@ public abstract class User {
     @NotNull
     private Long phone;
 
-    //Falta especificar la relación
-    //private Plan plan;
+    @NotNull
+    private Long ruc;
+
+    public Long getRuc() {
+        return ruc;
+    }
+
+    public void setRuc(Long ruc) {
+        this.ruc = ruc;
+    }
 
     public String getNames() {
         return names;

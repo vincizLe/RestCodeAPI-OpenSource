@@ -12,7 +12,6 @@ import javax.validation.constraints.Size;
 public class SaveConsultantResource extends User{
 
 
-    @NotNull
     private String linkedln;
 
     public String getLinkedln() {

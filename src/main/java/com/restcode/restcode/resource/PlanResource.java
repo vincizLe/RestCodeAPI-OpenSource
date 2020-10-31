@@ -1,25 +1,10 @@
-package com.restcode.restcode.domain.model;
+package com.restcode.restcode.resource;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
+public class PlanResource {
 
-import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-
-@Entity
-@Table(name="plans")
-public class Plan {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-
-    @NotNull
     private String name;
-
-    @NotNull
     private Double price;
-
 
 
     public Long getId() {

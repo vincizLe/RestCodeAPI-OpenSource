@@ -1,7 +1,10 @@
 package com.restcode.restcode.service;
 
 import com.restcode.restcode.domain.model.Consultant;
+import com.restcode.restcode.domain.model.Product;
 import com.restcode.restcode.domain.repository.IConsultantRepository;
+import com.restcode.restcode.domain.repository.IPlanRepository;
+import com.restcode.restcode.domain.repository.IRestaurantRepository;
 import com.restcode.restcode.domain.service.IConsultantService;
 import com.restcode.restcode.exception.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,9 @@ public class ConsultantService implements IConsultantService {
 
     @Autowired
     private IConsultantRepository consultantRepository;
+
+    @Autowired
+    private IPlanRepository planRepository;
 
 
     @Override
@@ -32,8 +38,12 @@ public class ConsultantService implements IConsultantService {
     }
 
     @Override
-    public Consultant createConsultant(Consultant consultant) {
-        return consultantRepository.save(consultant);
+    public Consultant createConsultant(Long planId, Consultant consultant) {
+        return planRepository.findById(planId).map(plan -> {
+            consultant.setPlan(plan);
+            return consultantRepository.save(consultant);
+        }).orElseThrow(() -> new ResourceNotFoundException(
+                "Plan", "Id", planId));
     }
 
     @Override

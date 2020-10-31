@@ -1,6 +1,8 @@
 package com.restcode.restcode.service;
 
 import com.restcode.restcode.domain.model.Sale;
+import com.restcode.restcode.domain.model.SaleDetail;
+import com.restcode.restcode.domain.repository.IRestaurantRepository;
 import com.restcode.restcode.domain.repository.ISaleRepository;
 import com.restcode.restcode.domain.service.ISaleService;
 import com.restcode.restcode.exception.ResourceNotFoundException;
@@ -15,10 +17,8 @@ public class SaleService implements ISaleService {
     @Autowired
     private ISaleRepository saleRepository;
 
-    @Override
-    public Page<Sale> getAllSales(Pageable pageable) {
-        return saleRepository.findAll(pageable);
-    }
+    @Autowired
+    private IRestaurantRepository restaurantRepository;
 
     @Override
     public Sale getSaleById(Long saleId) {
@@ -28,8 +28,12 @@ public class SaleService implements ISaleService {
     }
 
     @Override
-    public Sale createSale(Sale sale) {
-        return saleRepository.save(sale);
+    public Sale createSale(Long restaurantId, Sale sale) {
+        return restaurantRepository.findById(restaurantId).map(restaurant -> {
+            sale.setRestaurant(restaurant);
+            return saleRepository.save(sale);
+        }).orElseThrow(() -> new ResourceNotFoundException(
+                "Restaurant", "Id", restaurantId));
     }
 
     @Override
@@ -39,6 +43,11 @@ public class SaleService implements ISaleService {
         );
         saleRepository.delete(sale);
         return ResponseEntity.ok().build();
+    }
+
+    @Override
+    public Page<Sale> getAllSalesByRestaurantId(Long restaurantId, Pageable pageable) {
+        return saleRepository.findByRestaurantId(restaurantId, pageable);
     }
 
     //Its belong to the test

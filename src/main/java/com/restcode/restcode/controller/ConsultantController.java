@@ -1,9 +1,10 @@
 package com.restcode.restcode.controller;
 
 import com.restcode.restcode.domain.model.Consultant;
-import com.restcode.restcode.resource.ConsultantResource;
-import com.restcode.restcode.resource.SaveConsultantResource;
+import com.restcode.restcode.resource.*;
 import com.restcode.restcode.service.ConsultantService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
 import org.modelmapper.internal.bytebuddy.agent.builder.AgentBuilder;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Tag(name="Consultants", description ="Consultants API")
 @RestController
 @RequestMapping("/api")
 public class ConsultantController {
@@ -27,6 +29,7 @@ public class ConsultantController {
    @Autowired
    private ConsultantService consultantService;
 
+   @Operation(summary="Get All Consultants")
    @GetMapping("/consultants")
    public Page<ConsultantResource> getAllConsultants(Pageable pageable){
        Page<Consultant> consultantsPage= consultantService.getAllConsultants(pageable);
@@ -36,20 +39,21 @@ public class ConsultantController {
        return new PageImpl<>(resources,pageable, resources.size());
    }
 
-
+   @Operation(summary="Get Consultants By Id")
    @GetMapping("consultants/{consultantId}")
    public ConsultantResource getConsultantById(@PathVariable(value = "consultantId") Long consultantId){
        return convertToResource(consultantService.getConsultantById(consultantId));
    }
 
 
-
-   @PostMapping("/Consultant")
-   public ConsultantResource createConsultant(@Valid @RequestBody SaveConsultantResource resource){
-       Consultant consultant=convertToEntity(resource);
-       return  convertToResource(consultantService.createConsultant(consultant));
+   @Operation(summary="Create Consultant")
+   @PostMapping("plans/{planId}/consultants")
+   public ConsultantResource createConsultant(@PathVariable(value = "planId") Long planId,
+                                              @Valid @RequestBody SaveConsultantResource resource){
+       return convertToResource(consultantService.createConsultant(planId,convertToEntity(resource)));
    }
 
+   @Operation(summary="Delete Consultant")
    @DeleteMapping("/consultants/{consultantId}")
    public ResponseEntity<?> deleteConsultant(@PathVariable Long consultantId){
        return  consultantService.deleteConsultant(consultantId);

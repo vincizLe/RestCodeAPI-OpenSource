@@ -1,5 +1,9 @@
 package com.restcode.restcode.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -11,8 +15,13 @@ public class Consultant extends User {
     private Long id;
 
     @NotNull
-    @Column(unique = true)
     private String linkedln;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="plan_id", nullable = false)
+    @OnDelete(action= OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Plan plan;
 
     public Long getId() {
         return id;
@@ -22,7 +31,6 @@ public class Consultant extends User {
         this.id = id;
     }
 
-
     public String getLinkedln() {
         return linkedln;
     }
@@ -31,4 +39,11 @@ public class Consultant extends User {
         this.linkedln = linkedln;
     }
 
+    public Plan getPlan() {
+        return plan;
+    }
+
+    public void setPlan(Plan plan) {
+        this.plan = plan;
+    }
 }

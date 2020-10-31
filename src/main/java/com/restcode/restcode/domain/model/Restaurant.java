@@ -17,7 +17,7 @@ public class Restaurant {
     private Long id;
 
     @NotNull
-    private String restaurantName;
+    private String name;
 
     @NotNull
     private String address;
@@ -28,35 +28,37 @@ public class Restaurant {
     //Falta especificar la relación
     //private Owner owner;
 
-    public Long getId() {
-        return id;
-    }
+    public Long getId() { return id; }
 
-    public void setId(Long id) {
+    public Restaurant setId(Long id) {
         this.id = id;
+        return this;
     }
 
-    public String getRestaurantName() {
-        return restaurantName;
+    public String getName() {
+        return name;
     }
 
-    public void setRestaurantName(String restaurantName) {
-        this.restaurantName = restaurantName;
+    public Restaurant setName(String name) {
+        this.name = name;
+        return this;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public Restaurant setAddress(String address) {
         this.address = address;
+        return this;
     }
 
     public Long getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(Long phoneNumber) {
+    public Restaurant setPhoneNumber(Long phoneNumber) {
         this.phoneNumber = phoneNumber;
+        return this;
     }
 }
