@@ -2,7 +2,7 @@ package com.restcode.restcode.resource;
 
 public class RestaurantResource {
     private Long id;
-    private String restaurantName;
+    private String name;
     private String address;
     private Long phoneNumber;
 
@@ -13,10 +13,10 @@ public class RestaurantResource {
         return this;
     }
 
-    public String getRestaurantName() { return restaurantName; }
+    public String getName() { return name; }
 
-    public RestaurantResource setRestaurantName(String restaurantName) {
-        this.restaurantName = restaurantName;
+    public RestaurantResource setName(String name) {
+        this.name = name;
         return this;
     }
 

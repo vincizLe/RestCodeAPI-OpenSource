@@ -9,7 +9,7 @@ public class SaveRestaurantResource {
     @NotNull
     @NotBlank
     @Size(max=100)
-    private String restaurantName;
+    private String name;
 
     @NotNull
     @NotBlank
@@ -20,9 +20,13 @@ public class SaveRestaurantResource {
     private String phoneNumber;
 
 
-    public String getRestaurantName() { return restaurantName; }
+    public String getName() {
+        return name;
+    }
 
-    public void setRestaurantName(String restaurantName) { this.restaurantName = restaurantName; }
+    public void setName(String name) {
+        this.name = name;
+    }
 
     public String getAddress() {
         return address;
@@ -35,4 +39,6 @@ public class SaveRestaurantResource {
     }
 
     public void setPhoneNumber(String phoneNumber) { this.phoneNumber = phoneNumber; }
+
+
 }

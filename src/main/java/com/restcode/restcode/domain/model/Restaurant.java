@@ -17,7 +17,7 @@ public class Restaurant {
     private Long id;
 
     @NotNull
-    private String restaurantName;
+    private String name;
 
     @NotNull
     private String address;
@@ -35,12 +35,12 @@ public class Restaurant {
         return this;
     }
 
-    public String getRestaurantName() {
-        return restaurantName;
+    public String getName() {
+        return name;
     }
 
-    public Restaurant setRestaurantName(String restaurantName) {
-        this.restaurantName = restaurantName;
+    public Restaurant setName(String name) {
+        this.name = name;
         return this;
     }
 

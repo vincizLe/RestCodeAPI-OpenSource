@@ -4,13 +4,13 @@ import javax.validation.constraints.NotNull;
 
 public class SaveSaleDetailResource {
     @NotNull
-    private String description;
+    private int quantity;
 
-    public String getDescription() {
-        return description;
+    public int getQuantity() {
+        return quantity;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }

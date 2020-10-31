@@ -6,6 +6,8 @@ import com.restcode.restcode.domain.service.IRestaurantService;
 import com.restcode.restcode.exception.ResourceNotFoundException;
 import com.restcode.restcode.resource.RestaurantResource;
 import com.restcode.restcode.resource.SaveRestaurantResource;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -18,6 +20,7 @@ import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Tag(name="Restaurants", description ="Restaurants API")
 @RestController
 @RequestMapping("/api")
 public class RestaurantController {
@@ -35,6 +38,7 @@ public class RestaurantController {
         return mapper.map(resource, Restaurant.class);
     }
 
+    @Operation(summary="Get All Restaurants")
     @GetMapping("/restaurants")
     public Page<RestaurantResource> getAllRestaurants(Pageable pageable){
         Page<Restaurant> restaurantPage = restaurantService.getAllRestaurants(pageable);
@@ -44,17 +48,20 @@ public class RestaurantController {
         return new PageImpl<>(resources, pageable, resources.size());
     }
 
+    @Operation(summary="Get Restaurant By Id")
     @GetMapping("/restaurants/{restaurantId}")
     public RestaurantResource getRestaurantById(@PathVariable(value = "restaurantId") Long restaurantId){
         return convertToResource(restaurantService.getRestaurantById(restaurantId));
     }
 
+    @Operation(summary="Create Restaurant")
     @PostMapping("/restaurants")
     public RestaurantResource createRestaurant(@Valid @RequestBody SaveRestaurantResource resource){
         Restaurant restaurant = convertToEntity(resource);
         return convertToResource(restaurantService.createRestaurant(restaurant));
     }
 
+    @Operation(summary="Delete Restaurant")
     @PutMapping("/restaurants/{restaurantId}")
     public RestaurantResource updateRestaurant(@PathVariable Long restaurantId, @Valid @RequestBody SaveRestaurantResource resource){
         Restaurant restaurant = convertToEntity(resource);

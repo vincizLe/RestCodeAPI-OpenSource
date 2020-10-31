@@ -8,14 +8,19 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Table(name="categories")
+@Table(name="products")
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    private String categoryName;
+    private String name;
+
+    private String description;
+
+    @NotNull
+    private Double price;
 
     //Dependency Restaurant
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
@@ -34,12 +39,12 @@ public class Product {
         return this;
     }
 
-    public String getCategoryName() {
-        return categoryName;
+    public String getName() {
+        return name;
     }
 
-    public Product setCategoryName(String categoryName) {
-        this.categoryName = categoryName;
+    public Product setName(String name) {
+        this.name = name;
         return this;
     }
 
@@ -47,6 +52,24 @@ public class Product {
 
     public Product setRestaurant(Restaurant restaurant) {
         this.restaurant = restaurant;
+        return this;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Product setDescription(String description) {
+        this.description = description;
+        return this;
+    }
+
+    public Double getPrice() {
+        return price;
+    }
+
+    public Product setPrice(Double price) {
+        this.price = price;
         return this;
     }
 }

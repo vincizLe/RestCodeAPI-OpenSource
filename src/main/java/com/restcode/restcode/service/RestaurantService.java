@@ -36,7 +36,7 @@ public class RestaurantService implements IRestaurantService {
     public Restaurant updateRestaurant(Long restaurantId, Restaurant restaurantRequest) {
         Restaurant restaurant = restaurantRepository.findById(restaurantId)
                 .orElseThrow(()-> new ResourceNotFoundException("Restaurant","Id",restaurantId));
-        return restaurantRepository.save( restaurant.setRestaurantName(restaurantRequest.getRestaurantName())
+        return restaurantRepository.save( restaurant.setName(restaurantRequest.getName())
         .setAddress(restaurantRequest.getAddress())
         .setPhoneNumber(restaurantRequest.getPhoneNumber()));
     }
