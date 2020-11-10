@@ -12,7 +12,6 @@ import java.util.Date;
 
 @Entity
 @Table(name="assignments")
-@JsonIgnoreProperties(value={"dateAssignment"},allowGetters = true)
 public class Assignment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

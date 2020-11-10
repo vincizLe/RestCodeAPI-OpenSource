@@ -5,27 +5,31 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 @Entity
-@Table(name="comments")
-@JsonIgnoreProperties(value={"datetime"},allowGetters = true)
-public class Comment {
+@Table(name="appointments")
+@JsonIgnoreProperties(value={"currentDatetime"},allowGetters = true)
+public class Appointment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false, updatable = false)
     @CreationTimestamp
-    private Date datetime;
+    private Date currentDatetime;
 
     @NotNull
-    @Lob
-    private String commentary;
+    private Date scheduledDatetime;
+
+    @NotNull
+    private String topic;
+
+    @NotNull
+    private String meetingLink;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name="consultant_id", nullable = false)
@@ -47,20 +51,36 @@ public class Comment {
         this.id = id;
     }
 
-    public Date getDatetime() {
-        return datetime;
+    public Date getCurrentDatetime() {
+        return currentDatetime;
     }
 
-    public void setDatetime(Date datetime) {
-        this.datetime = datetime;
+    public void setCurrentDatetime(Date currentDatetime) {
+        this.currentDatetime = currentDatetime;
     }
 
-    public String getCommentary() {
-        return commentary;
+    public Date getScheduledDatetime() {
+        return scheduledDatetime;
     }
 
-    public void setCommentary(String commentary) {
-        this.commentary = commentary;
+    public void setScheduledDatetime(Date scheduledDatetime) {
+        this.scheduledDatetime = scheduledDatetime;
+    }
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+
+    public String getMeetingLink() {
+        return meetingLink;
+    }
+
+    public void setMeetingLink(String meetingLink) {
+        this.meetingLink = meetingLink;
     }
 
     public Consultant getConsultant() {
