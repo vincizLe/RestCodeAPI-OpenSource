@@ -1,6 +1,10 @@
 package com.restcode.restcode.domain.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.annotation.CreatedDate;
 
 import javax.persistence.*;
@@ -15,19 +19,25 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Temporal(TemporalType.TIMESTAMP )
-    @CreatedDate
-    private Date datePublication;
+    @Column(nullable = false, updatable = false)
+    @CreationTimestamp
+    private Date datetime;
 
     @NotNull
     @Lob
     private String commentary;
 
-    //Falta especificar la relación
-    //private Consultant consultant;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="consultant_id", nullable = false)
+    @OnDelete(action= OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Consultant consultant;
 
-    //Falta especificar la relación
-    //private Owner owner;
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name="owner_id", nullable = false)
+    @OnDelete(action= OnDeleteAction.CASCADE)
+    @JsonIgnore
+    private Owner owner;
 
     public Long getId() {
         return id;
@@ -37,12 +47,12 @@ public class Comment {
         this.id = id;
     }
 
-    public Date getDatePublication() {
-        return datePublication;
+    public Date getDatetime() {
+        return datetime;
     }
 
-    public void setDatePublication(Date datePublication) {
-        this.datePublication = datePublication;
+    public void setDatetime(Date datetime) {
+        this.datetime = datetime;
     }
 
     public String getCommentary() {
@@ -53,4 +63,19 @@ public class Comment {
         this.commentary = commentary;
     }
 
+    public Consultant getConsultant() {
+        return consultant;
+    }
+
+    public void setConsultant(Consultant consultant) {
+        this.consultant = consultant;
+    }
+
+    public Owner getOwner() {
+        return owner;
+    }
+
+    public void setOwner(Owner owner) {
+        this.owner = owner;
+    }
 }

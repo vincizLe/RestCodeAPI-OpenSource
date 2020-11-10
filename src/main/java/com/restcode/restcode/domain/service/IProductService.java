@@ -6,7 +6,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 public interface IProductService {
-    Page<Product> getAllProductByRestaurantId(Long restaurantId, Pageable pageable);
+    Page<Product> getAllProductsByRestaurantId(Long restaurantId, Pageable pageable);
     Product getProductByIdAndRestaurantId(Long restaurantId, Long productId);
     Product createProduct(Long restaurantId, Product product);
     Product updateProduct(Long productId, Product productRequest);

@@ -21,7 +21,7 @@ public class ProductService implements IProductService {
     private IRestaurantRepository restaurantRepository;
 
     @Override
-    public Page<Product> getAllProductByRestaurantId(Long restaurantId, Pageable pageable) {
+    public Page<Product> getAllProductsByRestaurantId(Long restaurantId, Pageable pageable) {
         return productRepository.findByRestaurantId(restaurantId,pageable);
     }
 

@@ -24,11 +24,11 @@ public class SaleDetail {
     private Sale sale;
 
 
-    /*@ManyToOne(fetch=FetchType.LAZY,optional = false)
+    @ManyToOne(fetch=FetchType.LAZY,optional = false)
     @JoinColumn(name="product_id",nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
-    private Product product;*/
+    private Product product;
 
     public Long getId() {
         return id;
@@ -54,13 +54,11 @@ public class SaleDetail {
         this.quantity = quantity;
     }
 
-    /*public Product getProduct() {
+    public Product getProduct() {
         return product;
     }
 
     public void setProduct(Product product) {
         this.product = product;
-    }*/
-
-
+    }
 }

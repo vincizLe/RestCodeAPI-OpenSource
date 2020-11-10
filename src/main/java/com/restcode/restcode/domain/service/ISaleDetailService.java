@@ -8,6 +8,6 @@ import org.springframework.http.ResponseEntity;
 public interface ISaleDetailService {
     Page<SaleDetail> getAllSaleDetailsBySaleId(Long saleId,Pageable pageable);
     SaleDetail getSaleDetailByIdAndSaleId(Long saleId,Long saleDetailId);
-    SaleDetail createSaleDetail(Long saleId,SaleDetail saleDetail);
+    SaleDetail createSaleDetail(Long saleId, Long productId, SaleDetail saleDetail);
     ResponseEntity<?> deleteSaleDetail(Long saleId,Long saleDetailId);
 }

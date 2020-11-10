@@ -1,7 +1,9 @@
 package com.restcode.restcode.service;
 
+import com.restcode.restcode.domain.model.Product;
 import com.restcode.restcode.domain.model.Sale;
 import com.restcode.restcode.domain.model.SaleDetail;
+import com.restcode.restcode.domain.repository.IProductRepository;
 import com.restcode.restcode.domain.repository.ISaleDetailRepository;
 import com.restcode.restcode.domain.repository.ISaleRepository;
 import com.restcode.restcode.domain.service.ISaleDetailService;
@@ -20,6 +22,9 @@ public class SaleDetailService implements ISaleDetailService {
     @Autowired
     private ISaleRepository saleRepository;
 
+    @Autowired
+    private IProductRepository productRepository;
+
     @Override
     public Page<SaleDetail> getAllSaleDetailsBySaleId(Long saleId, Pageable pageable) {
         return saleDetailRepository.findBySaleId(saleId, pageable);
@@ -33,9 +38,13 @@ public class SaleDetailService implements ISaleDetailService {
     }
 
     @Override
-    public SaleDetail createSaleDetail(Long saleId, SaleDetail saleDetail) {
+    public SaleDetail createSaleDetail(Long saleId, Long productId, SaleDetail saleDetail) {
+        Product product = productRepository.findById(productId).orElseThrow(
+                ()-> new ResourceNotFoundException("Product","Id",productId)
+        );
         return saleRepository.findById(saleId).map(sale -> {
             saleDetail.setSale(sale);
+            saleDetail.setProduct(product);
             return saleDetailRepository.save(saleDetail);
         }).orElseThrow(() -> new ResourceNotFoundException(
                 "Sale", "Id", saleId));

@@ -1,4 +1,4 @@
-package com.restcode.restcode;
+package com.restcode.restcode.UnitTests;
 
 import com.restcode.restcode.domain.model.Sale;
 import com.restcode.restcode.domain.repository.ISaleRepository;
