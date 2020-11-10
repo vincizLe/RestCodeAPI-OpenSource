@@ -61,7 +61,7 @@ public class RestaurantController {
         return convertToResource(restaurantService.createRestaurant(restaurant));
     }
 
-    @Operation(summary="Delete Restaurant")
+    @Operation(summary="Update Restaurant")
     @PutMapping("/restaurants/{restaurantId}")
     public RestaurantResource updateRestaurant(@PathVariable Long restaurantId, @Valid @RequestBody SaveRestaurantResource resource){
         Restaurant restaurant = convertToEntity(resource);
@@ -70,21 +70,9 @@ public class RestaurantController {
 
     }
 
+    @Operation(summary="Delete Restaurant")
     @DeleteMapping("/restaurants/{restaurantId}")
     public ResponseEntity<?> deleteRestaurant(@PathVariable Long restaurantId){
         return restaurantService.deleteRestaurant(restaurantId);
     }
-
-
-   /* @PutMapping("/restaurants/{restaurantId}")
-    public Restaurant updatedRestaurant(@PathVariable Long restaurantId, @Valid @RequestBody Restaurant restaurantRequest){
-        return IRestaurantRepository.findById(restaurantId).map(restaurant -> {
-            restaurant.setRestaurantName(restaurantRequest.getRestaurantName());
-            restaurant.setAddress(restaurantRequest.getAddress());
-            restaurant.setPhoneNumber(restaurantRequest.getPhoneNumber());
-            return IRestaurantRepository.save(restaurant);
-        }).orElseThrow(() -> new ResourceNotFoundException("RestaurantId" + restaurantId + "not found"));
-    }*/
-
-
 }

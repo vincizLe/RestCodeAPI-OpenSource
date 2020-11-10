@@ -24,7 +24,6 @@ import java.util.stream.Collectors;
 @RestController
 @RequestMapping("/api")
 public class CommentController {
-
     @Autowired
     private ModelMapper mapper;
     @Autowired
@@ -72,7 +71,7 @@ public class CommentController {
 
     @Operation(summary="Delete Comment")
     @DeleteMapping("/owners/{ownerId}/comments/{commentId}")
-    public ResponseEntity<?> deleteSaleDetail(
+    public ResponseEntity<?> deleteComment(
             @PathVariable (value = "ownerId") Long ownerId,
             @PathVariable (value = "commentId") Long commentId) {
         return commentService.deleteComment(ownerId, commentId);

@@ -71,12 +71,4 @@ public class OwnerController {
         return convertToResource(
                 ownerService.updateOwner(ownerId, owner));
     }
-
-    @Operation(summary="Assign Plan To Owner")
-    @PostMapping("/posts/{ownerId}/plans/{planId}")
-    public OwnerResource assignOwnerPlan(
-            @PathVariable(name = "ownerId") Long ownerId,
-            @PathVariable(name = "planId") Long planId) {
-        return convertToResource(ownerService.assignOwnerPlan(ownerId, planId));
-    }
 }

@@ -28,10 +28,10 @@ public class Assignment {
     private Consultant consultant;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name="owner_id", nullable = false)
+    @JoinColumn(name="restaurant_id", nullable = false)
     @OnDelete(action= OnDeleteAction.CASCADE)
     @JsonIgnore
-    private Owner owner;
+    private Restaurant restaurant;
 
     public Long getId() {
         return id;
@@ -57,11 +57,11 @@ public class Assignment {
         this.consultant = consultant;
     }
 
-    public Owner getOwner() {
-        return owner;
+    public Restaurant getRestaurant() {
+        return restaurant;
     }
 
-    public void setOwner(Owner owner) {
-        this.owner = owner;
+    public void setRestaurant(Restaurant restaurant) {
+        this.restaurant = restaurant;
     }
 }
